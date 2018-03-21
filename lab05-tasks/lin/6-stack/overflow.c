@@ -87,7 +87,7 @@ void f2(mytype x, mytype y, mytype z)
 	v[4] = 8;
 	v[5] = 9;
 	v[6] = 20;
-	v[7] = 0x400791;
+	v[7] = 0x80485d4;
 
 	/* save current stack pointer */
 	get_esp(esp);

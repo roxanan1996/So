@@ -18,10 +18,8 @@ int main(void)
 	unsigned char *w;
 
 	/* TODO - use w to show all bytes of n in order */
-	
-	unsigned char *sth = &w;
-	for (i = 1; i < 5; ++i) {
-		printf("%hhx\n", *(sth - i));
+	for (i = 0; i < 4; ++i) {
+		printf("%hhx\n", *((unsigned char*)&w + 8 + 3 - i));
 	}
 	return 0;
 }
