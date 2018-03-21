@@ -52,7 +52,7 @@ void show_snapshot(void)
 {
 	for (i = 0; i < size; i++)
 		/* TODO1 - fill in the correct parameters to be printed */
-		printf("[%p]:%x\n", ebp - i /* TODO1 */);
+		printf("[%p]:%x\n", ebp - i, *(ebp - i) /* TODO1 */);
 }
 
 /**
@@ -61,8 +61,8 @@ void show_snapshot(void)
 void take_snapshot(void)
 {
 	for (p = ebp; p >= esp; p--) {
-		stack[size].address = /* TODO1: set the current address */
-		stack[size].value   = /* TODO1: set the value at address */
+		stack[size].address = p; /* TODO1: set the current address */
+		stack[size].value   = *p; /* TODO1: set the value at address */
 		size++;
 	}
 }
@@ -84,7 +84,11 @@ void f2(mytype x, mytype y, mytype z)
 	/* TODO2: use v so that when function 'f2' returns,
 	 * the 'show_message' function executes
 	 */
-	
+	v[4] = 8;
+	v[5] = 9;
+	v[6] = 20;
+	v[7] = 0x400791;
+
 	/* save current stack pointer */
 	get_esp(esp);
 
