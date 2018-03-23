@@ -1,4 +1,4 @@
-CC = gcc
+CC = gcc -O0
 CPPFLAGS = -I../utils
 CFLAGS = -Wall -Wextra -g
 
