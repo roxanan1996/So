@@ -1,0 +1,33 @@
+FILE: README
+AUTHOR: ROXANA-ELENA NICOLESCU
+GROUP: 331CA
+
+************************************************TEMA1***************************
+
+-> Pentru implementarea, in device.py am facut urmatoarele modificari:
+-> Device:
+	-> adaugat in clasa Device -> o variabila de sincronizare intre device uri -> o bariera reentranta
+		   -> o lista in care retin scripturile primite
+		   -> un event care sa spune DeviceThread-ului ca poate incepe procesarea
+		   -> un thread DeviceThread care se va ocupa de aflarea vecinilor la fiecare timepoint + rularea scripturilor primite
+		   -> un map in care tin pentru fiecare locatie "existenta" (nu neaparat corespunzatoare device-ului) un lock
+	           -> lista cu vecinii (va fi modificata la fiecare timepoint)
+	-> in setup_devices "sharuiesc" varibilele necesare sincronizarii -> bariera reentranta si lock-urile folosite pentru fiecare locatie (in device-ul cu id0 le creez corespunzator si apoi le transmit cate o referinta celoralte device uri)
+	-> in assign_script pun in lista de script-uri primite daca scriptul nu e None, altfel setez event-ul care sa spune thread ului ca poate procesa lista de scripturi
+
+-> DeviceThread
+	-> intr-o bucla, apelez get_neighbors pentru a stii vecinii la timepoint ul curent
+	-> astept eventul de procesare a scripturilor
+	-> creez un pool de ThreadPool(am vazut pe forum ca poate fi folosit)
+	-> astept ca task urile adaugate in pool sa fie rezolvate iar apoi astept dupa bariera folosita pentru sincronizarea intre device uri la finalul unui timepoint
+	-> daca nu am vecini in timepoint-ul respectiv, dau break din bucla
+-> functia run_script este folosita de thread urile din ThreadPool pentru a rula un script primit pentru o anumita locatie
+	-> treb obtinut lock pentru locatia respectiva
+	-> gasit vecinii care au date despre locatia respectiva
+	-> apelat script
+	-> updatat datele vecinilor + updatat datele device ului daca e nevoie
+	-> eliberat lock
+	-> lock-ul e util pentru consistenta datelor
+
+Pentru bariera reentranta am folosit barrier.py din laborator 3
+
