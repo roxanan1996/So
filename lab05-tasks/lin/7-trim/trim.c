@@ -17,16 +17,16 @@ char last_name[]  = "    Potter";
 
 static char *trim(char *s)
 {
-//	char * sth = NULL;
+	char *copy = NULL;
 	char *p = malloc(strlen(s)+1);
 
 	strcpy(p, s);
 	
-//	sth = p;
-	while (*p == ' ')
-		p++;
+	copy = p;
+	while (*copy == ' ')
+		copy++;
 
-	strcpy(s, p);
+	strcpy(s, copy);
 	free(p);
 
 	return s;

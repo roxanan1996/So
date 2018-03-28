@@ -80,14 +80,14 @@ void f2(mytype x, mytype y, mytype z)
 	v[0] = 6;
 	v[1] = 7;
 	v[2] = 8;
-
+	//v[3] = 9;
 	/* TODO2: use v so that when function 'f2' returns,
 	 * the 'show_message' function executes
 	 */
 	v[4] = 8;
 	v[5] = 9;
 	v[6] = 20;
-	v[7] = 0x80485d4;
+	v[7] = &show_message;//0x80485d4;
 
 	/* save current stack pointer */
 	get_esp(esp);
